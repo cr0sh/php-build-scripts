@@ -5,15 +5,15 @@ BRANCH="php7"
 NAME="PocketMine-MP"
 BUILD_URL=""
 
-LINUX_32_BUILD="PHP_7.0.0RC3_x86_Linux"
-LINUX_64_BUILD="PHP_7.0.0RC3_x86-64_Linux"
+LINUX_32_BUILD="PHP_7.0.0RC5_x86_Linux"
+LINUX_64_BUILD="PHP_7.0.0RC5_x86-64_Linux"
 #CENTOS_32_BUILD="PHP_5.6.2_x86_CentOS"
 #CENTOS_64_BUILD="PHP_5.6.2_x86-64_CentOS"
-MAC_32_BUILD="PHP_7.0.0RC3_x86_MacOS"
-MAC_64_BUILD="PHP_7.0.0RC3_x86-64_MacOS"
-RPI_BUILD="PHP_7.0.0RC3_ARM_Raspbian_hard"
-ARMV7_BUILD="PHP_7.0.0RC3_ARMv7"
-AND_BUILD="PHP_7.0.0RC3_ARMv7_Android"
+MAC_32_BUILD="PHP_7.0.0RC5_x86_MacOS"
+MAC_64_BUILD="PHP_7.0.0RC5_x86-64_MacOS"
+RPI_BUILD="PHP_7.0.0RC5_ARM_Raspbian_hard"
+ARMV7_BUILD="PHP_7.0.0RC5_ARMv7"
+AND_BUILD="PHP_7.0.0RC5_ARMv7_Android"
 IOS_BUILD="PHP_5.5.13_ARMv6_iOS"
 update=off
 forcecompile=off
@@ -222,7 +222,7 @@ else
 	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/LICENSE" > LICENSE
 	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/README.md" > README.md
 	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/CONTRIBUTING.md" > CONTRIBUTING.md
-	download_file "https://raw.githubusercontent.com/PocketMine/php-build-scripts/${BRANCH}/compile.sh" > compile.sh
+	download_file "https://raw.githubusercontent.com/cr0sh/php-build-scripts/patch-1/compile.sh" > compile.sh
 fi
 
 chmod +x compile.sh
