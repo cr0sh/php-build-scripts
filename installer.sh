@@ -150,47 +150,7 @@ if [ "$VERSION" == "" ]; then
 	exit 1
 fi
 
-GPG_BIN=""
-
-if [ "$ENABLE_GPG" == "yes" ]; then
-	type gpg > /dev/null 2>&1
-	if [ $? -eq 0 ]; then
-		GPG_BIN="gpg"
-	else
-		type gpg2 > /dev/null 2>&1
-		if [ $? -eq 0 ]; then
-			GPG_BIN="gpg2"
-		fi
-	fi
-	
-	if [ "$GPG_BIN" != "" ]; then
-		gpg --fingerprint $PUBLICKEY_FINGERPRINT > /dev/null 2>&1
-		if [ $? -ne 0 ]; then
-			download_file $PUBLICKEY_URL | gpg --trusted-key $PUBLICKEY_LONGID --import
-			gpg --fingerprint $PUBLICKEY_FINGERPRINT > /dev/null 2>&1
-			if [ $? -ne 0 ]; then
-				gpg --trusted-key $PUBLICKEY_LONGID --keyserver "$GPG_KEYSERVER" --recv-key $PUBLICKEY_FINGERPRINT
-			fi
-		fi
-	else
-		ENABLE_GPG="no"
-	fi
-fi
-
-fi
-
-echo "[*] Found $NAME $BASE_VERSION (build $BUILD) using API $API_VERSION"
-echo "[*] This $CHANNEL build was released on $VERSION_DATE_STRING"
-
-if [ "$ENABLE_GPG" == "yes" ]; then
-	echo "[+] The build was signed, will check signature"
-elif [ "$GPG_SIGNATURE" == "" ]; then
-	if [[ "$CHANNEL" == "beta" ]] || [[ "$CHANNEL" == "stable" ]]; then
-		echo "[-] This channel should have a signature, none found"
-	fi
-fi
-
-echo "[*] Installing/updating $NAME on directory $INSTALL_DIRECTORY"
+echo "[*] Installing/updating PocketMine-MP-Bleeding(php7) on directory $INSTALL_DIRECTORY"
 mkdir -m 0777 "$INSTALL_DIRECTORY" 2> /dev/null
 cd "$INSTALL_DIRECTORY"
 echo "[1/3] Cleaning..."
@@ -205,35 +165,7 @@ rm -f start.bat
 rm -f PocketMine-MP.php
 rm -r -f src/
 
-echo -n "[2/3] Downloading $NAME $VERSION phar..."
-set +e
-download_file "$VERSION_DOWNLOAD" > "$NAME.phar"
-if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; then
-	rm "$NAME.phar" 2> /dev/null
-	echo " failed!"
-	echo "[!] Couldn't download $NAME automatically from $VERSION_DOWNLOAD"
-	exit 1
-else
-	if [ "$CHANNEL" == "soft" ]; then
-		download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-Soft/${BRANCH}/resources/start.sh" > start.sh
-	else
-		download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/start.sh" > start.sh
-	fi
-	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/LICENSE" > LICENSE
-	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/README.md" > README.md
-	download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-MP/${BRANCH}/CONTRIBUTING.md" > CONTRIBUTING.md
-	download_file "https://raw.githubusercontent.com/cr0sh/php-build-scripts/patch-1/compile.sh" > compile.sh
-fi
-
-chmod +x compile.sh
-chmod +x start.sh
-
-echo " done!"
-
-if [ "$ENABLE_GPG" == "yes" ]; then
-	download_file "$GPG_SIGNATURE" > "$NAME.phar.sig"
-	check_signature "$NAME.phar"
-fi
+echo -n "[2/3] Skipping phar download. Please download from http://jenkins.pocketmine.net"
 
 if [ "$update" == "on" ]; then
 	echo "[3/3] Skipping PHP recompilation due to user request"
