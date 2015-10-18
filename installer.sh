@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHANNEL="stable"
+CHANNEL="development"
 BRANCH="php7"
 NAME="PocketMine-MP"
 BUILD_URL=""
@@ -16,9 +16,9 @@ ARMV7_BUILD="PHP_7.0.0RC5_ARMv7"
 AND_BUILD="PHP_7.0.0RC5_ARMv7_Android"
 IOS_BUILD="PHP_5.5.13_ARMv6_iOS"
 update=off
-forcecompile=off
+forcecompile=on
 alldone=no
-checkRoot=on
+checkRoot=off
 XDEBUG="off"
 
 INSTALL_DIRECTORY="./"
