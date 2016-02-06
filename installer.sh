@@ -212,7 +212,7 @@ if ! [ -s "$NAME.phar" ] || [ "$(head -n 1 $NAME.phar)" == '<!DOCTYPE html>' ]; 
 	rm "$NAME.phar" 2> /dev/null
 	echo " failed!"
 	echo "[!] Couldn't download $NAME automatically from $VERSION_DOWNLOAD"
-	exit 1
+	echo "[!] Please download and install binary manually."
 else
 	if [ "$CHANNEL" == "soft" ]; then
 		download_file "https://raw.githubusercontent.com/PocketMine/PocketMine-Soft/${BRANCH}/resources/start.sh" > start.sh
