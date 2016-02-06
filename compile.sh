@@ -90,6 +90,8 @@ FLAGS_LTO=""
 
 LD_PRELOAD=""
 
+THREADS="4"
+
 while getopts "::t:oj:srcdlxzff:" OPTION; do
 
 	case $OPTION in
